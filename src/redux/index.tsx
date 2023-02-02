@@ -1,0 +1,3 @@
+export const MovieTOKEN =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5Mzk2MmIzMWQyNzRiMTU1YTliMzk1NWY5NDg4NjlkMCIsInN1YiI6IjYzZGI2OWFhYTkxMTdmNzBhMzM4YzUyMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Rg9JIg16czjKbJCBPhFyw86if_isieW_hki9viRHDIg";
+export const MovieURL = `https://api.themoviedb.org/3`;

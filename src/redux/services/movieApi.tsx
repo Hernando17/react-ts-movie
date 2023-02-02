@@ -1,0 +1,24 @@
+// Need to use the React-specific entry point to allow generating React hooks
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { MovieURL, MovieTOKEN } from "../";
+
+export const movieApi = createApi({
+  reducerPath: "movieApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: MovieURL,
+    prepareHeaders: (headers) => {
+      if (MovieTOKEN) {
+        headers.set("authorization", `Bearer ${MovieTOKEN}`);
+      }
+
+      return headers;
+    },
+  }),
+  endpoints: (builder) => ({
+    getPopularMovie: builder.query({
+      query: (name) => `/movie/popular`,
+    }),
+  }),
+});
+
+export const { useGetPopularMovieQuery } = movieApi;
