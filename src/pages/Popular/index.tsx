@@ -1,8 +1,9 @@
 import { useEffect, Fragment } from "react";
 import { useGetPopularMovieQuery } from "../../redux/services/movieApi";
-import { Card } from "../../components";
+import { Card, Input } from "../../components";
+import Layout from "../layout";
 
-export default function Home() {
+export default function Popular() {
   const {
     data: moviePopular,
     error: errorMoviePopular,
@@ -21,9 +22,12 @@ export default function Home() {
   }
 
   return (
-    <Fragment>
+    <Layout>
       <div className="container">
-        <h1 className="title">Popular</h1>
+        <div className="top-section">
+          <h1 className="title">Popular</h1>
+          <Input />
+        </div>
         <div className="movie">
           {moviePopular?.results.map((movie) => (
             <Card key={movie.id}>
@@ -31,11 +35,14 @@ export default function Home() {
                 src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                 className="movie-image"
               />
-              <p>{movie.original_title}</p>
+              <div className="movie-title">
+                <h4>{movie.original_title}</h4>
+                <p className="release-date">{movie.release_date}</p>
+              </div>
             </Card>
           ))}
         </div>
       </div>
-    </Fragment>
+    </Layout>
   );
 }
