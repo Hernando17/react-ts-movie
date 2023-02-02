@@ -2,6 +2,7 @@ import { useEffect, Fragment } from "react";
 import { useGetPopularMovieQuery } from "../../redux/services/movieApi";
 import { Card, Input } from "../../components";
 import Layout from "../layout";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function Popular() {
   const {
@@ -22,7 +23,7 @@ export default function Popular() {
   }
 
   return (
-    <Layout>
+    <Layout title="Movie | Popular">
       <div className="container">
         <div className="top-section">
           <h1 className="title">Popular</h1>

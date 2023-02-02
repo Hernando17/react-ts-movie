@@ -38,6 +38,7 @@ body {
 
 .movie {
   display: grid;
+  padding: 20px;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   justify-content: center;
@@ -90,6 +91,17 @@ body {
 .link {
   text-decoration: none;
   color: white;
+}
+
+.end-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 24px 0 0 0;
+  grid-column: 1 / 6;
+  background-color: rgb(85, 85, 85);
+  height: 100px;
+  width: 100%;
 }
 
 @media (max-width: 768px) {

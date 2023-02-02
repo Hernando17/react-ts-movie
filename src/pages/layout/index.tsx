@@ -1,11 +1,22 @@
 import { Fragment } from "react";
 import { TopBar } from "../../components";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
-export default function Layout({ children }) {
+interface Props {
+  children: React.ReactNode;
+}
+
+export default function Layout({ children, title }) {
+  console.log(title);
   return (
     <Fragment>
-      <TopBar />
-      {children}
+      <HelmetProvider>
+        <Helmet>
+          <title>{title}</title>
+        </Helmet>
+        <TopBar />
+        {children}
+      </HelmetProvider>
     </Fragment>
   );
 }
