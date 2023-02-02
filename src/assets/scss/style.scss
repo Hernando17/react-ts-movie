@@ -38,7 +38,6 @@ body {
 
 .movie {
   display: grid;
-  padding: 20px;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   justify-content: center;
@@ -93,15 +92,21 @@ body {
   color: white;
 }
 
-.end-data {
+.pagination {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 24px 0 0 0;
-  grid-column: 1 / 6;
-  background-color: rgb(85, 85, 85);
-  height: 100px;
+  flex-wrap: wrap;
   width: 100%;
+  gap: 10px;
+  margin: 20px 0 20px 0;
+}
+
+.pagination-button {
+  padding: 5px;
+  border-width: 0;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
