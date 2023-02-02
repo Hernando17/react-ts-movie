@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Layout from "../layout";
-import { Input, Card, Loading } from "../../components";
+import { Input, Card, Loading, Pagination } from "../../components";
 import {
   useGetDiscoverMovieQuery,
   useGetMovieByKeywordQuery,
@@ -9,6 +9,8 @@ import { BarLoader } from "react-spinners";
 
 export default function Landing() {
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [moviePerPage] = useState(10);
   const [keyword, setKeyword] = useState("");
 
   const {
@@ -33,11 +35,30 @@ export default function Landing() {
   const applySearch = (e: any) => {
     e.preventDefault();
     setKeyword(search);
-    refetchMovieByKeyword;
+    refetchMovieByKeyword();
   };
 
   if (isFetchingDiscoverMovie || isFetchingMovieByKeyword) {
     return <Loading />;
+  }
+
+  const indexOfLastMovie = currentPage * moviePerPage;
+  const indexOfFirstMovie = indexOfLastMovie - moviePerPage;
+  const currentMovie =
+    keyword != ""
+      ? dataMovieByKeyword.results.slice(indexOfFirstMovie, indexOfLastMovie)
+      : dataDiscoverMovie.results.slice(indexOfFirstMovie, indexOfLastMovie);
+
+  const movieTotal =
+    keyword != ""
+      ? dataMovieByKeyword.results.length
+      : dataDiscoverMovie.results.length;
+
+  const pageNumber = [];
+  const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
+
+  for (let i = 1; i <= Math.ceil(movieTotal / moviePerPage); i++) {
+    pageNumber.push(i);
   }
 
   return (
@@ -52,9 +73,18 @@ export default function Landing() {
         </form>
       </div>
       <div className="container">
+        <div className="pagination">
+          {pageNumber.map((number) => (
+            <Pagination
+              currentPage={currentPage}
+              number={number}
+              onClick={() => paginate(number)}
+            />
+          ))}
+        </div>
         <div className="movie">
           {keyword == ""
-            ? dataDiscoverMovie.results.map((movie: any) => (
+            ? currentMovie.map((movie: any) => (
                 <Card key={movie.id}>
                   <img
                     src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}

@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  useGetPopularMovieQuery,
-  useGetMovieByKeywordQuery,
-} from "../../redux/services/movieApi";
+import { useGetPopularMovieQuery } from "../../redux/services/movieApi";
 import { Card, Input, Pagination, Loading } from "../../components";
 import Layout from "../layout";
 
@@ -14,7 +11,6 @@ export default function Popular() {
   } = useGetPopularMovieQuery();
 
   const [search, setSearch] = useState("");
-
   const [currentPage, setCurrentPage] = useState(1);
   const [moviePerPage] = useState(10);
 
