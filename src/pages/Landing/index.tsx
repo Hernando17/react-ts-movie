@@ -5,13 +5,14 @@ import {
   useGetDiscoverMovieQuery,
   useGetMovieByKeywordQuery,
 } from "../../redux/services/movieApi";
-import { BarLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 
 export default function Landing() {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [moviePerPage] = useState(10);
   const [keyword, setKeyword] = useState("");
+  const navigate = useNavigate();
 
   const {
     data: dataDiscoverMovie,
@@ -61,10 +62,12 @@ export default function Landing() {
     pageNumber.push(i);
   }
 
+  const toDetail = () => {};
+
   return (
     <Layout title="Movie | Home">
       <div className="home">
-        <h1 className="title">Search Movie</h1>
+        <h1 className="title">Discover Movie</h1>
         <form className="search-section" onSubmit={applySearch}>
           <Input name="search" value={search} onChange={searchChange} />
           <button type="submit" className="pagination-button">
@@ -85,7 +88,12 @@ export default function Landing() {
         <div className="movie">
           {keyword == ""
             ? currentMovie.map((movie: any) => (
-                <Card key={movie.id}>
+                <Card
+                  key={movie.id}
+                  onClick={() => {
+                    navigate(`/movie-detail/${movie.id}`);
+                  }}
+                >
                   <img
                     src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                     className="movie-image"

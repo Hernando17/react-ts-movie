@@ -1,7 +1,7 @@
-interface Props {
-  children: React.ReactNode;
-}
-
-export const Card: React.FC<Props> = ({ children }) => {
-  return <div className="card">{children}</div>;
+export const Card = ({ children, onClick }) => {
+  return (
+    <div className="card" onClick={onClick}>
+      {children}
+    </div>
+  );
 };
