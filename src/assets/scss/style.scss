@@ -92,6 +92,10 @@ body {
   color: white;
 }
 
+.link.active {
+  color: rgb(74, 43, 250);
+}
+
 .pagination {
   display: flex;
   flex-wrap: wrap;
@@ -112,6 +116,20 @@ body {
 
 .pagination-button.active {
   color: rgb(74, 43, 250);
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  margin: 64px 0 0 0;
+  align-items: center;
+}
+
+.search-section {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
 }
 
 @media (max-width: 768px) {

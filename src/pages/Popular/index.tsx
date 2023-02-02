@@ -14,6 +14,7 @@ export default function Popular() {
   } = useGetPopularMovieQuery();
 
   const [search, setSearch] = useState("");
+
   const [currentPage, setCurrentPage] = useState(1);
   const [moviePerPage] = useState(10);
 

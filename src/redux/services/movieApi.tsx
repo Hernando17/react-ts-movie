@@ -15,7 +15,10 @@ export const movieApi = createApi({
   }),
   endpoints: (builder) => ({
     getPopularMovie: builder.query({
-      query: (name) => `/movie/popular`,
+      query: () => `/movie/popular`,
+    }),
+    getDiscoverMovie: builder.query({
+      query: () => `/discover/movie`,
     }),
     getMovieByKeyword: builder.query({
       query: ({ keyword }) => `/search/movie?query=${keyword}`,
@@ -23,4 +26,8 @@ export const movieApi = createApi({
   }),
 });
 
-export const { useGetPopularMovieQuery, useGetMovieByKeywordQuery } = movieApi;
+export const {
+  useGetPopularMovieQuery,
+  useGetDiscoverMovieQuery,
+  useGetMovieByKeywordQuery,
+} = movieApi;
