@@ -1,10 +1,11 @@
 import { useState } from "react";
 import Layout from "../layout";
-import { Input, Card } from "../../components";
+import { Input, Card, Loading } from "../../components";
 import {
   useGetDiscoverMovieQuery,
   useGetMovieByKeywordQuery,
 } from "../../redux/services/movieApi";
+import { BarLoader } from "react-spinners";
 
 export default function Landing() {
   const [search, setSearch] = useState("");
@@ -36,7 +37,7 @@ export default function Landing() {
   };
 
   if (isFetchingDiscoverMovie || isFetchingMovieByKeyword) {
-    return <h1 className="title">Loading</h1>;
+    return <Loading />;
   }
 
   return (

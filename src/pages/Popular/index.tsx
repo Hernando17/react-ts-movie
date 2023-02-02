@@ -3,7 +3,7 @@ import {
   useGetPopularMovieQuery,
   useGetMovieByKeywordQuery,
 } from "../../redux/services/movieApi";
-import { Card, Input, Pagination } from "../../components";
+import { Card, Input, Pagination, Loading } from "../../components";
 import Layout from "../layout";
 
 export default function Popular() {
@@ -19,7 +19,7 @@ export default function Popular() {
   const [moviePerPage] = useState(10);
 
   if (isLoadingMoviePopular) {
-    return <h1 className="title">Loading</h1>;
+    return <Loading />;
   }
 
   const searchChange = (e: any) => {

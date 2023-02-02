@@ -132,6 +132,13 @@ body {
   width: 100%;
 }
 
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 @media (max-width: 768px) {
   .movie {
     grid-template-columns: repeat(2, 1fr);
