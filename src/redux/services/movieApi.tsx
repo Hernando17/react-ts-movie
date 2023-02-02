@@ -1,4 +1,3 @@
-// Need to use the React-specific entry point to allow generating React hooks
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { MovieURL, MovieTOKEN } from "../";
 
@@ -18,7 +17,10 @@ export const movieApi = createApi({
     getPopularMovie: builder.query({
       query: (name) => `/movie/popular`,
     }),
+    getMovieByKeyword: builder.query({
+      query: ({ keyword }) => `/search/movie?query=${keyword}`,
+    }),
   }),
 });
 
-export const { useGetPopularMovieQuery } = movieApi;
+export const { useGetPopularMovieQuery, useGetMovieByKeywordQuery } = movieApi;

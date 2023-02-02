@@ -96,7 +96,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  gap: 10px;
+  gap: 5px;
   margin: 20px 0 20px 0;
 }
 
@@ -107,6 +107,11 @@ body {
   background-color: black;
   color: white;
   cursor: pointer;
+  min-width: 32px;
+}
+
+.pagination-button.active {
+  color: rgb(74, 43, 250);
 }
 
 @media (max-width: 768px) {

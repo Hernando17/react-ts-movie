@@ -1,5 +1,8 @@
-import { useEffect, Fragment, useState } from "react";
-import { useGetPopularMovieQuery } from "../../redux/services/movieApi";
+import { useEffect, useState } from "react";
+import {
+  useGetPopularMovieQuery,
+  useGetMovieByKeywordQuery,
+} from "../../redux/services/movieApi";
 import { Card, Input, Pagination } from "../../components";
 import Layout from "../layout";
 
@@ -10,31 +13,43 @@ export default function Popular() {
     isLoading: isLoadingMoviePopular,
   } = useGetPopularMovieQuery();
 
+  const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [moviePerPage] = useState(10);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     console.log(moviePopular);
-  //   }, 1000);
-  //   return () => clearInterval(interval);
-  // });
 
   if (isLoadingMoviePopular) {
     return <h1 className="title">Loading</h1>;
   }
 
+  const searchChange = (e: any) => {
+    setSearch(e.target.value);
+  };
+
+  const filterBySearch = (search: any) => {
+    return moviePopular.results.filter((o: any) =>
+      Object.keys(o).some((k) =>
+        o[k]
+          ? o[k]
+              .toString()
+              .toLowerCase()
+              .includes(search.toString().toLowerCase())
+          : ""
+      )
+    );
+  };
+
   const indexOfLastMovie = currentPage * moviePerPage;
   const indexOfFirstMovie = indexOfLastMovie - moviePerPage;
-  const currentMovie = moviePopular.results.slice(
-    indexOfFirstMovie,
-    indexOfLastMovie
-  );
+  const currentMovie =
+    search != ""
+      ? filterBySearch(search).slice(indexOfFirstMovie, indexOfLastMovie)
+      : moviePopular.results.slice(indexOfFirstMovie, indexOfLastMovie);
 
-  const movieTotal = moviePopular.results.length;
+  const movieTotal =
+    search != "" ? filterBySearch(search).length : moviePopular.results.length;
 
   const pageNumber = [];
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
 
   for (let i = 1; i <= Math.ceil(movieTotal / moviePerPage); i++) {
     pageNumber.push(i);
@@ -45,15 +60,19 @@ export default function Popular() {
       <div className="container">
         <div className="top-section">
           <h1 className="title">Popular</h1>
-          <Input />
+          <Input value={search} onChange={searchChange} name="search" />
         </div>
         <div className="pagination">
           {pageNumber.map((number) => (
-            <Pagination number={number} onClick={() => paginate(number)} />
+            <Pagination
+              currentPage={currentPage}
+              number={number}
+              onClick={() => paginate(number)}
+            />
           ))}
         </div>
         <div className="movie">
-          {currentMovie.map((movie) => (
+          {currentMovie.map((movie: any) => (
             <Card key={movie.id}>
               <img
                 src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}

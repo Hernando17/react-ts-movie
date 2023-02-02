@@ -1,5 +1,12 @@
-export function Input() {
+export function Input({ value, onChange, name }) {
   return (
-    <input type="text" className="search" placeholder="Search movie here..." />
+    <input
+      type="text"
+      value={value}
+      onChange={onChange}
+      name={name}
+      className="search"
+      placeholder="Search movie here..."
+    />
   );
 }
