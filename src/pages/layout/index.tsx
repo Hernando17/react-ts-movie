@@ -7,7 +7,6 @@ interface Props {
 }
 
 export default function Layout({ children, title }) {
-  console.log(title);
   return (
     <Fragment>
       <HelmetProvider>

@@ -176,7 +176,7 @@ body {
   font-size: 12px;
 }
 
-.error404 {
+.error {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -192,5 +192,14 @@ body {
 
   .container {
     padding: 64px 32px;
+  }
+
+  .top-section {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search {
+    width: 90%;
   }
 }

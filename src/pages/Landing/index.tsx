@@ -1,6 +1,13 @@
 import { useState } from "react";
 import Layout from "../layout";
-import { Input, Card, Loading, Pagination } from "../../components";
+import {
+  Input,
+  Card,
+  Loading,
+  Pagination,
+  Error401,
+  Error404,
+} from "../../components";
 import {
   useGetDiscoverMovieQuery,
   useGetMovieByKeywordQuery,
@@ -39,6 +46,18 @@ export default function Landing() {
 
   if (isLoadingDiscoverMovie || isLoadingMovieByKeyword) {
     return <Loading />;
+  } else if (errorDiscoverMovie || errorMovieByKeyword) {
+    if (
+      errorDiscoverMovie?.status == 404 ||
+      errorMovieByKeyword?.status == 404
+    ) {
+      return <Error404 />;
+    } else if (
+      errorDiscoverMovie?.status == 401 ||
+      errorMovieByKeyword?.status == 401
+    ) {
+      return <Error401 />;
+    }
   }
 
   const indexOfLastMovie = currentPage * moviePerPage;
@@ -75,6 +94,7 @@ export default function Landing() {
         <div className="pagination">
           {pageNumber.map((number) => (
             <Pagination
+              key={number}
               currentPage={currentPage}
               number={number}
               onClick={() => paginate(number)}

@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { useGetMovieUpcomingQuery } from "../../redux/services/movieApi";
-import { Card, Input, Pagination, Loading } from "../../components";
+import {
+  Card,
+  Input,
+  Pagination,
+  Loading,
+  Error401,
+  Error404,
+} from "../../components";
 import Layout from "../layout";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +26,12 @@ export default function Upcoming() {
 
   if (isLoadingMovieUpcoming) {
     return <Loading />;
+  } else if (errorMovieUpcoming) {
+    if (errorMovieUpcoming?.status == 404) {
+      return <Error404 />;
+    } else if (errorMovieUpcoming?.status == 401) {
+      return <Error401 />;
+    }
   }
 
   const searchChange = (e: any) => {

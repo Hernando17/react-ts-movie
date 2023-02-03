@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { useGetMovieTopRatedQuery } from "../../redux/services/movieApi";
-import { Card, Input, Pagination, Loading } from "../../components";
+import {
+  Card,
+  Input,
+  Pagination,
+  Loading,
+  Error401,
+  Error404,
+} from "../../components";
 import Layout from "../layout";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +26,12 @@ export default function TopRated() {
 
   if (isLoadingMovieTopRated) {
     return <Loading />;
+  } else if (errorMovieTopRated) {
+    if (errorMovieTopRated?.status == 404) {
+      return <Error404 />;
+    } else if (errorMovieTopRated?.status == 401) {
+      return <Error401 />;
+    }
   }
 
   const searchChange = (e: any) => {

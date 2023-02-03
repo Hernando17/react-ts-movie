@@ -1,21 +1,25 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useGetMovieDetailQuery } from "../../redux/services/movieApi";
 import { useParams, useNavigate } from "react-router-dom";
-import { Loading } from "../../components";
+import { Loading, Error401, Error404 } from "../../components";
 import { minuteToHour } from "../../utils";
 
 export default function MovieDetail() {
   const navigate = useNavigate();
   const { movie_id } = useParams<{ movie_id: string }>();
-  const { data, error, isFetching } = useGetMovieDetailQuery({
+  const { data, error, isLoading } = useGetMovieDetailQuery({
     movie_id,
   });
 
-  if (isFetching) {
+  if (isLoading) {
     return <Loading />;
+  } else if (error) {
+    if (error?.status == 404) {
+      return <Error404 />;
+    } else if (error?.status == 401) {
+      return <Error401 />;
+    }
   }
-
-  console.log(data);
 
   return (
     <div className="container">
