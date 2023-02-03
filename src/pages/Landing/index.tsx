@@ -81,16 +81,16 @@ export default function Landing() {
 
   return (
     <Layout title="Movie | Discover">
-      <div className="home">
-        <h1 className="title">Discover Movies</h1>
+      <div className="container">
+        <h1 className="title" style={{ textAlign: "center" }}>
+          Discover Movies
+        </h1>
         <form className="search-section" onSubmit={applySearch}>
           <Input name="search" value={search} onChange={searchChange} />
-          <button type="submit" className="pagination-button">
+          <button type="submit" className="button-basic">
             Search
           </button>
         </form>
-      </div>
-      <div className="container">
         <div className="pagination">
           {pageNumber.map((number) => (
             <Pagination
