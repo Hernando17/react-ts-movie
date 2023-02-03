@@ -11,7 +11,7 @@ export function TopBar() {
             to="/"
             className={location.pathname == "/" ? "link active" : "link"}
           >
-            Home
+            Discover
           </Link>
         </li>
         <li>

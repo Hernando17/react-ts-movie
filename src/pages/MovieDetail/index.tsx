@@ -2,6 +2,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useGetMovieDetailQuery } from "../../redux/services/movieApi";
 import { useParams, useNavigate } from "react-router-dom";
 import { Loading } from "../../components";
+import { minuteToHour } from "../../utils";
 
 export default function MovieDetail() {
   const navigate = useNavigate();
@@ -38,6 +39,11 @@ export default function MovieDetail() {
             {data.genres.map((genre: any) => (
               <p className="genre-item">{genre.name}</p>
             ))}
+            <ul style={{ marginLeft: 16 }}>
+              <li>{`${minuteToHour(data.runtime).hour}h ${
+                minuteToHour(data.runtime).minuteLeft
+              }m`}</li>
+            </ul>
           </div>
           <p style={{ marginTop: 24 }}>{data.tagline}</p>
           <p style={{ marginTop: 12 }}>{data.overview}</p>

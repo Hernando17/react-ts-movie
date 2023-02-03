@@ -61,7 +61,7 @@ export default function Landing() {
   }
 
   return (
-    <Layout title="Movie | Home">
+    <Layout title="Movie | Discover">
       <div className="home">
         <h1 className="title">Discover Movies</h1>
         <form className="search-section" onSubmit={applySearch}>
