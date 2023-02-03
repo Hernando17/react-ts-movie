@@ -24,7 +24,6 @@ export default function Landing() {
     data: dataMovieByKeyword,
     error: errorMovieByKeyword,
     isLoading: isLoadingMovieByKeyword,
-    refetch: refetchMovieByKeyword,
   } = useGetMovieByKeywordQuery({
     keyword,
   });
@@ -36,7 +35,6 @@ export default function Landing() {
   const applySearch = (e: any) => {
     e.preventDefault();
     setKeyword(search);
-    refetchMovieByKeyword();
   };
 
   if (isLoadingDiscoverMovie || isLoadingMovieByKeyword) {
@@ -61,8 +59,6 @@ export default function Landing() {
   for (let i = 1; i <= Math.ceil(movieTotal / moviePerPage); i++) {
     pageNumber.push(i);
   }
-
-  const toDetail = () => {};
 
   return (
     <Layout title="Movie | Home">

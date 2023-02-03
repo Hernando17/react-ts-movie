@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
-import { useGetMovieNowPlayingQuery } from "../../redux/services/movieApi";
+import { useGetMovieUpcomingQuery } from "../../redux/services/movieApi";
 import { Card, Input, Pagination, Loading } from "../../components";
 import Layout from "../layout";
 import { useNavigate } from "react-router-dom";
 
-export default function NowPlaying() {
+export default function Upcoming() {
   const navigate = useNavigate();
 
   const {
-    data: movieNowPlaying,
-    error: errorMovieNowPlaying,
-    isLoading: isLoadingMovieNowPlaying,
-  } = useGetMovieNowPlayingQuery();
+    data: movieUpcoming,
+    error: errorMovieUpcoming,
+    isLoading: isLoadingMovieUpcoming,
+  } = useGetMovieUpcomingQuery();
 
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [moviePerPage] = useState(10);
 
-  if (isLoadingMovieNowPlaying) {
+  if (isLoadingMovieUpcoming) {
     return <Loading />;
   }
 
@@ -26,7 +26,7 @@ export default function NowPlaying() {
   };
 
   const filterBySearch = (search: any) => {
-    return movieNowPlaying.results.filter((o: any) =>
+    return movieUpcoming.results.filter((o: any) =>
       Object.keys(o).some((k) =>
         o[k]
           ? o[k]
@@ -43,12 +43,10 @@ export default function NowPlaying() {
   const currentMovie =
     search != ""
       ? filterBySearch(search).slice(indexOfFirstMovie, indexOfLastMovie)
-      : movieNowPlaying.results.slice(indexOfFirstMovie, indexOfLastMovie);
+      : movieUpcoming.results.slice(indexOfFirstMovie, indexOfLastMovie);
 
   const movieTotal =
-    search != ""
-      ? filterBySearch(search).length
-      : movieNowPlaying.results.length;
+    search != "" ? filterBySearch(search).length : movieUpcoming.results.length;
 
   const pageNumber = [];
   const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
@@ -58,10 +56,10 @@ export default function NowPlaying() {
   }
 
   return (
-    <Layout title="Movie | Now Playing">
+    <Layout title="Movie | Upcoming">
       <div className="container">
         <div className="top-section">
-          <h1 className="title">Now Playing</h1>
+          <h1 className="title">Upcoming</h1>
           <Input value={search} onChange={searchChange} name="search" />
         </div>
         <div className="pagination">

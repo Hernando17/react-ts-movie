@@ -29,6 +29,12 @@ export const movieApi = createApi({
     getMovieNowPlaying: builder.query({
       query: () => `/movie/now_playing`,
     }),
+    getMovieUpcoming: builder.query({
+      query: () => `/movie/upcoming`,
+    }),
+    getMovieTopRated: builder.query({
+      query: () => `/movie/top_rated`,
+    }),
   }),
 });
 
@@ -38,4 +44,6 @@ export const {
   useGetMovieByKeywordQuery,
   useGetMovieDetailQuery,
   useGetMovieNowPlayingQuery,
+  useGetMovieUpcomingQuery,
+  useGetMovieTopRatedQuery,
 } = movieApi;

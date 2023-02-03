@@ -32,8 +32,26 @@ export function TopBar() {
             Now Playing
           </Link>
         </li>
-        <li>Upcoming</li>
-        <li>Top Rated</li>
+        <li>
+          <Link
+            to="/upcoming"
+            className={
+              location.pathname == "/upcoming" ? "link active" : "link"
+            }
+          >
+            Upcoming
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/top-rated"
+            className={
+              location.pathname == "/top-rated" ? "link active" : "link"
+            }
+          >
+            Top Rated
+          </Link>
+        </li>
       </ul>
     </div>
   );
