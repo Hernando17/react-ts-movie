@@ -17,13 +17,13 @@ export default function Landing() {
   const {
     data: dataDiscoverMovie,
     error: errorDiscoverMovie,
-    isFetching: isFetchingDiscoverMovie,
+    isLoading: isLoadingDiscoverMovie,
   } = useGetDiscoverMovieQuery();
 
   const {
     data: dataMovieByKeyword,
     error: errorMovieByKeyword,
-    isFetching: isFetchingMovieByKeyword,
+    isLoading: isLoadingMovieByKeyword,
     refetch: refetchMovieByKeyword,
   } = useGetMovieByKeywordQuery({
     keyword,
@@ -39,7 +39,7 @@ export default function Landing() {
     refetchMovieByKeyword();
   };
 
-  if (isFetchingDiscoverMovie || isFetchingMovieByKeyword) {
+  if (isLoadingDiscoverMovie || isLoadingMovieByKeyword) {
     return <Loading />;
   }
 
@@ -67,7 +67,7 @@ export default function Landing() {
   return (
     <Layout title="Movie | Home">
       <div className="home">
-        <h1 className="title">Discover Movie</h1>
+        <h1 className="title">Discover Movies</h1>
         <form className="search-section" onSubmit={applySearch}>
           <Input name="search" value={search} onChange={searchChange} />
           <button type="submit" className="pagination-button">
@@ -105,7 +105,12 @@ export default function Landing() {
                 </Card>
               ))
             : dataMovieByKeyword.results.map((movie: any) => (
-                <Card key={movie.id}>
+                <Card
+                  key={movie.id}
+                  onClick={() => {
+                    navigate(`/movie-detail/${movie.id}`);
+                  }}
+                >
                   <img
                     src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                     className="movie-image"

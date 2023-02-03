@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { useGetPopularMovieQuery } from "../../redux/services/movieApi";
 import { Card, Input, Pagination, Loading } from "../../components";
 import Layout from "../layout";
+import { useNavigate } from "react-router-dom";
 
 export default function Popular() {
+  const navigate = useNavigate();
+
   const {
     data: moviePopular,
     error: errorMoviePopular,
@@ -70,7 +73,12 @@ export default function Popular() {
         </div>
         <div className="movie">
           {currentMovie.map((movie: any) => (
-            <Card key={movie.id}>
+            <Card
+              key={movie.id}
+              onClick={() => {
+                navigate(`/movie-detail/${movie.id}`);
+              }}
+            >
               <img
                 src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                 className="movie-image"

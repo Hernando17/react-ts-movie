@@ -7,7 +7,7 @@ export default function Router() {
       <Route path="/" element={<Landing />} />
       <Route path="/popular" element={<Popular />} />
       <Route path="/now-playing" element={<NowPlaying />} />
-      <Route path="/movie-detail/:id" element={<MovieDetail />} />
+      <Route path="/movie-detail/:movie_id" element={<MovieDetail />} />
     </Routes>
   );
 }
