@@ -1,5 +1,3 @@
-# yunatest
-
 Features
 - [x] ReactJs with Typescript
 - [x] Simple Responsive Design
